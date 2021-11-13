@@ -2,10 +2,14 @@ const express = require('express')
 const { MongoClient } = require('mongodb');
 const app = express()
 const cors = require('cors')
+
 require('dotenv').config()
+
 const ObjectId = require("mongodb").ObjectId;
 const port = process.env.PORT || 5000;
 //middle wire
+// //DB_USER=autoMartDb
+// DB_PASS=OiatRx1v0mWkSctO
 app.use(cors())
 app.use(express.json())
 
