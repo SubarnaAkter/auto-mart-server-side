@@ -21,7 +21,7 @@ async function run() {
     const productsCollection = database.collection("products");
     const ordersCollection = database.collection("orders");
     const usersCollection = database.collection("users");
-    const np = database.collection("reviews");
+    const reviewCollection = database.collection("reviews");
     //all products
     app.get('/products', async (req, res) => {
       const size = req.query.size;
@@ -86,7 +86,23 @@ async function run() {
       const deleted = await ordersCollection.deleteOne(query);
       res.json(deleted)
     })
-
+    app.put('/orders/:id',async (req,res)=>{
+      const id=req.params.id;
+     
+     const filter ={_id: ObjectId(id)};
+     const options = { upsert: true };
+     const updateDoc = {
+         $set: {
+          status:"Approved",
+         
+         },
+       };
+   
+    const result=await ordersCollection.updateOne(filter,updateDoc,options)
+     res.json(result);
+ 
+ })
+//users
     app.post('/users', async (req, res) => {
 
       const cursor = req.body;
